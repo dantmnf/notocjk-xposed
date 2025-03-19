@@ -1,0 +1,28 @@
+plugins {
+    alias(libs.plugins.android.library)
+}
+
+android {
+    namespace 'xyz.cirno.notocjk.hidden_api'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 31
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+}

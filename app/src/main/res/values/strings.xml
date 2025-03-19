@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Noto CJK</string>
+    <string name="xposed_description">Full Noto CJK</string>
+</resources>
