@@ -245,22 +245,16 @@ public class SystemServerHook {
     private static FontConfig.FontFamily createFamilyForLocale(String s, LocaleList locales, Map<String, File> psMap) {
         var fonts = new ArrayList<FontConfig.Font>();
         var index = mapTagToTtcIndex(s);
-        addVariableFontsToList(fonts, "NotoSansCJKjp-Thin", psMap.get("NotoSansCJKjp-Thin"), index, null);
-        addVariableFontsToList(fonts, "NotoSerifCJKjp-ExtraLight", psMap.get("NotoSerifCJKjp-ExtraLight"), index, "serif");
+        addVariableFontsToList(fonts, "NotoSansCJKjp-Thin", psMap.get("NotoSansCJKjp-Thin"), index, null, 100, 200, 300, 400, 500, 600, 700, 800, 900);
+        addVariableFontsToList(fonts, "NotoSerifCJKjp-ExtraLight", psMap.get("NotoSerifCJKjp-ExtraLight"), index, "serif", 200, 300, 400, 500, 600, 700, 800, 900);
         return FontConfigWrapper.newFontFamily(fonts, locales, FontConfig.FontFamily.VARIANT_DEFAULT);
     }
 
-    private static void addVariableFontsToList(List<FontConfig.Font> fonts, String psName, File f, int index, String family) {
+    private static void addVariableFontsToList(List<FontConfig.Font> fonts, String psName, File f, int index, String family, int... weights) {
         if (Build.VERSION.SDK_INT < 35) {
-            fonts.add(new FontConfig.Font(f, null, psName, new FontStyle(100, FontStyle.FONT_SLANT_UPRIGHT), index, "'wght' 100", family));
-            fonts.add(new FontConfig.Font(f, null, psName, new FontStyle(200, FontStyle.FONT_SLANT_UPRIGHT), index, "'wght' 200", family));
-            fonts.add(new FontConfig.Font(f, null, psName, new FontStyle(300, FontStyle.FONT_SLANT_UPRIGHT), index, "'wght' 300", family));
-            fonts.add(new FontConfig.Font(f, null, psName, new FontStyle(400, FontStyle.FONT_SLANT_UPRIGHT), index, "'wght' 400", family));
-            fonts.add(new FontConfig.Font(f, null, psName, new FontStyle(500, FontStyle.FONT_SLANT_UPRIGHT), index, "'wght' 500", family));
-            fonts.add(new FontConfig.Font(f, null, psName, new FontStyle(600, FontStyle.FONT_SLANT_UPRIGHT), index, "'wght' 600", family));
-            fonts.add(new FontConfig.Font(f, null, psName, new FontStyle(700, FontStyle.FONT_SLANT_UPRIGHT), index, "'wght' 700", family));
-            fonts.add(new FontConfig.Font(f, null, psName, new FontStyle(800, FontStyle.FONT_SLANT_UPRIGHT), index, "'wght' 800", family));
-            fonts.add(new FontConfig.Font(f, null, psName, new FontStyle(900, FontStyle.FONT_SLANT_UPRIGHT), index, "'wght' 900", family));
+            for(var weight : weights) {
+                fonts.add(new FontConfig.Font(f, null, psName, new FontStyle(weight, FontStyle.FONT_SLANT_UPRIGHT), index, "'wght' " + weight, family));
+            }
         } else {
             fonts.add(new FontConfig.Font(f, null, psName, new FontStyle(FontStyle.FONT_WEIGHT_NORMAL, FontStyle.FONT_SLANT_UPRIGHT), index, "", family, FontConfig.Font.VAR_TYPE_AXES_WGHT));
         }
