@@ -262,7 +262,7 @@ public class SystemServerHook {
             fonts.add(new FontConfig.Font(f, null, psName, new FontStyle(800, FontStyle.FONT_SLANT_UPRIGHT), index, "'wght' 800", family));
             fonts.add(new FontConfig.Font(f, null, psName, new FontStyle(900, FontStyle.FONT_SLANT_UPRIGHT), index, "'wght' 900", family));
         } else {
-            fonts.add(new FontConfig.Font(f, null, psName, new FontStyle(400, FontStyle.FONT_SLANT_UPRIGHT), index, "'wght' 400", family, FontConfig.Font.VAR_TYPE_AXES_WGHT));
+            fonts.add(new FontConfig.Font(f, null, psName, new FontStyle(FontStyle.FONT_WEIGHT_NORMAL, FontStyle.FONT_SLANT_UPRIGHT), index, "", family, FontConfig.Font.VAR_TYPE_AXES_WGHT));
         }
     }
 
